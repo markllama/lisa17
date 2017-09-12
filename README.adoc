@@ -14,7 +14,7 @@ The sameplss here are deliberately simple and incomplete. They are meant to be u
 * Project Atomic: http://www.projectatomic.io/
 * CoreOS Container Linux: https://coreos.com/os/docs/latest
 
-[[demonstrators]]
+[demonstrators]
 === Vagrant Demonstrators
 * Atomic Vagrant: https://github.com/projectatomic/vagrant-atomic
 * Container Linux Vagrant: https://github.com/coreos/coreos-vagrant
@@ -25,13 +25,12 @@ The sameplss here are deliberately simple and incomplete. They are meant to be u
 
 * http://cloud.centos.org/centos/7/atomic/images/[CentOS Atomic Host Repository]
 * https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/[Fedora 26 Atomic Host Repository]
-* 
 
 ==== CoreOS Container Linux
 
-Vagrant Box Lookup -
+Vagrant Box Lookup
 
 * https://alpha.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Alpha]
 * https://beta.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Beta]
-* https://stable.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Stable]]
+* https://stable.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Stable]
 
