@@ -1,0 +1,37 @@
+= Container Hosts
+
+This repository contains some simple setup examples for two container hosts:
+
+* ProjectAtomic Atomic Host
+* CoreOS Container Linux
+
+The sameplss here are deliberately simple and incomplete. They are meant to be used as a base for learning how to configure and use the container hosts, not as a realistic deployment example.  For more comprehensive examples see the <<demonstors>> below.
+
+== Links
+
+=== Projects
+
+* Project Atomic: http://www.projectatomic.io/
+* CoreOS Container Linux: https://coreos.com/os/docs/latest
+
+[[demonstrators]]
+=== Vagrant Demonstrators
+* Atomic Vagrant: https://github.com/projectatomic/vagrant-atomic
+* Container Linux Vagrant: https://github.com/coreos/coreos-vagrant
+
+=== Image Repositories
+
+==== Atomic Host
+
+* http://cloud.centos.org/centos/7/atomic/images/[CentOS Atomic Host Repository]
+* https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/[Fedora 26 Atomic Host Repository]
+* 
+
+==== CoreOS Container Linux
+
+Vagrant Box Lookup -
+
+* https://alpha.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Alpha]
+* https://beta.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Beta]
+* https://stable.release.core-os.net/amd64-usr/current/coreos_production_vagrant_virtualbox.json[Stable]]
+
