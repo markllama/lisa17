@@ -1,4 +1,0 @@
----
-hostconf:
-  eth1: true
-  etcd: true
