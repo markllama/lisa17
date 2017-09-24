@@ -1,0 +1,49 @@
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+
+require 'yaml'
+
+settings = YAML.load_file 'config.yml'
+
+$box_name = "atomic-fedora26"
+$instance_name_prefix = "atomic"
+$num_instances = 3
+
+data = {
+  'hosts' => {
+    'atomic-01' => { 'ipaddr' => '172.17.8.101' },
+    'atomic-02' => { 'ipaddr' => '172.17.8.102' },
+    'atomic-03' => { 'ipaddr' => '172.17.8.103' },
+  }
+}
+
+File.open("hosts.yml", "w") {|f| f.write(data.to_yaml) }
+
+Vagrant.configure("2") do |config|
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "atomic-f26" 
+  config.vm.box_url = "https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box"
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # always use Vagrants insecure key
+  config.ssh.insert_key = false
+  # forward ssh agent to easily ssh into the different machines
+  config.ssh.forward_agent = true
+
+  (1..$num_instances).each do |i|
+    config.vm.define vm_name = "%s-%02d" % [$instance_name_prefix, i] do |config|
+      config.vm.hostname = vm_name
+      ip = data['hosts'][vm_name]['ipaddr']
+      config.vm.network :private_network, ip: ip
+      config.vm.network :forwarded_port, guest: 9090, host: 9090 + i
+
+      config.vm.provision :shell, :name => "enable eth1", :inline => "ifup eth1", :privileged => true
+      config.vm.provision :shell, :name => "gen config", :inline => "python3 sync/transform.py sync/etcd.conf.j2 %s < sync/hosts.yml > etcd.conf" % vm_name
+      config.vm.provision :shell, :name => "set config", :inline => "cp etcd.conf /etc/etcd", :privileged => true
+      config.vm.provision :shell, :name => "start etcd", :inline => "systemctl start etcd --no-block", :privileged => true
+      #if hostconf.
+    end
+  end
+end

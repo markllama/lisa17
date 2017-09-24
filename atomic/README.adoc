@@ -1,0 +1,3 @@
+= Atomic Vagrant
+
+A Vagrantfile and support files to create a cluster of Atomic Hosts

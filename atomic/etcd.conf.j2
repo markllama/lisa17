@@ -1,0 +1,28 @@
+# [member]
+ETCD_NAME={{ hostname }}
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+ETCD_LISTEN_PEER_URLS="http://{{ hosts[hostname].ipaddr }}:2380"
+ETCD_LISTEN_CLIENT_URLS="http://127.0.0.1:2379,http://{{ hosts[hostname].ipaddr }}:2379"
+
+# [cluster]
+ETCD_INITIAL_ADVERTISE_PEER_URLS="http://{{ hosts[hostname].ipaddr }}:2380"
+ETCD_INITIAL_CLUSTER_STATE="new"
+ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+ETCD_ADVERTISE_CLIENT_URLS="http://{{ hosts[hostname].ipaddr }}:2379"
+
+ETCD_INITIAL_CLUSTER="{% for name in hosts.keys() -%}
+  {{- name }}=http://{{ hosts[name].ipaddr }}:2380
+  {%- if not loop.last -%},{% endif -%}
+{% endfor %}"
+
+#[security]
+#ETCD_CERT_FILE=""
+#ETCD_KEY_FILE=""
+#ETCD_CLIENT_CERT_AUTH="false"
+#ETCD_TRUSTED_CA_FILE=""
+#ETCD_AUTO_TLS="false"
+#ETCD_PEER_CERT_FILE=""
+#ETCD_PEER_KEY_FILE=""
+#ETCD_PEER_CLIENT_CERT_AUTH="false"
+#ETCD_PEER_TRUSTED_CA_FILE=""
+#ETCD_PEER_AUTO_TLS="false"
