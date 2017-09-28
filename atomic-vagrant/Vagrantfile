@@ -39,11 +39,48 @@ Vagrant.configure("2") do |config|
       config.vm.network :private_network, ip: ip
       config.vm.network :forwarded_port, guest: 9090, host: 9090 + i
 
-      config.vm.provision :shell, :name => "enable eth1", :inline => "ifup eth1", :privileged => true
-      config.vm.provision :shell, :name => "gen config", :inline => "python3 sync/transform.py sync/etcd.conf.j2 %s < sync/hosts.yml > etcd.conf" % vm_name
-      config.vm.provision :shell, :name => "set config", :inline => "cp etcd.conf /etc/etcd", :privileged => true
-      config.vm.provision :shell, :name => "start etcd", :inline => "systemctl start etcd --no-block", :privileged => true
-      #if hostconf.
+      config.vm.provision :shell, :name => "enable eth1",
+                          :inline => "ifup eth1",
+                          :privileged => true
+      
+      config.vm.provision :shell, :name => "gen config",
+                          :inline => "python3 sync/transform.py sync/etcd.conf.j2 %s < sync/hosts.yml > etcd.conf" % vm_name
+      
+      config.vm.provision :shell, :name => "set config",
+                          :inline => "cp etcd.conf /etc/etcd",
+                          :privileged => true
+      
+      if i < $num_instances then
+        config.vm.provision :shell,
+                            :name => "start etcd",
+                            :inline => "systemctl start etcd --no-block",
+                            :privileged => true
+      else
+        config.vm.provision :shell,
+                            :name => "start etcd",
+                            :inline => "systemctl start etcd",
+                            :privileged => true        
+      end
+      
+      config.vm.provision :shell, :name => "set flannel iface",
+                          :inline => "sed -i '$aFLANNEL_OPTIONS=\"--iface=eth1\"' /etc/sysconfig/flanneld",
+                          :privileged => true
+      
+      if i == $num_instances then
+        config.vm.provision :shell, :name => "set flannel cfg",
+                            :inline => "etcdctl set /atomic.io/network/config \'{ \"Network\": \"172.24.0.0/16\", \"Backend\": {\"Type\": \"vxlan\"}}\'"
+      end
+
+      if i < $num_instances then
+        config.vm.provision :shell, :name => "flannel service",
+                            :inline => "systemctl start flanneld --no-block",
+                            :privileged => true
+      else
+        config.vm.provision :shell, :name => "flannel service",
+                            :inline => "systemctl start flanneld",
+                            :privileged => true
+      end
+ 
     end
   end
 end
