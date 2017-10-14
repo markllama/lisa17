@@ -33,11 +33,16 @@ def configure_etcd(vm, instance_num)
                :name => "start etcd" + block_start(instance_num),
                :inline => "systemctl start etcd" + block_start(instance_num),
                :privileged => true
+
+  vm.provision :shell,
+               :name => "enable etcd",
+               :inline => "systemctl enable etcd",
+               :privileged => true
 end
 
 def configure_flanneld(vm, instance_num)
   vm.provision :shell, :name => "set flannel iface",
-               :inline => "sed -i '$aFLANNEL_OPTIONS=\"--iface=eth1\"' /etc/sysconfig/flanneld",
+               :inline => "sed -i '$aFLANNEL_OPTIONS=\"--ip-masq=true --iface=eth1\"' /etc/sysconfig/flanneld",
                :privileged => true
       
   # Only set the flannel configuration in etcd once
@@ -48,6 +53,11 @@ def configure_flanneld(vm, instance_num)
 
   vm.provision :shell, :name => "flannel service" + block_start(instance_num),
                :inline => "systemctl start flanneld" + block_start(instance_num),
+               :privileged => true
+
+  vm.provision :shell,
+               :name => "enable flanneld",
+               :inline => "systemctl enable flanneld",
                :privileged => true
 
   vm.provision :shell, :name => "docker service" + block_start(instance_num),

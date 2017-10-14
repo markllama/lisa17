@@ -49,6 +49,8 @@ Vagrant.configure("2") do |config|
       config.vm.hostname = vm_name
       ip = data['hosts'][vm_name]['ipaddr']
       config.vm.network :private_network, ip: ip
+
+      forward_cockpit(config.vm, i)
       
       enable_eth1(config.vm)
 
