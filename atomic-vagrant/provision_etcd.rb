@@ -63,4 +63,8 @@ def configure_flanneld(vm, instance_num)
   vm.provision :shell, :name => "docker service" + block_start(instance_num),
                :inline => "systemctl restart docker" + block_start(instance_num),
                :privileged => true
+
+  vm.provision :shell, :name => "iptables FORWARD ACCEPT",
+               :inline => "iptables -P FORWARD ACCEPT",
+               :privileged => true
 end
