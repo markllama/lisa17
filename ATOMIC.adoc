@@ -15,6 +15,7 @@ cd lisa17/atomic-vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 ----
 
+[subs=+macros]
 .Start Atomic Cluster
 ----
 $ +vagrant status+
