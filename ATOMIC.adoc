@@ -1,0 +1,41 @@
+= Atomic Host Demo
+
+To avoid download time, add the box using a local image.
+
+.Add Atomic Vagrant Box (VirtualBox)
+----
+vagrant box add --name atomic-f26 \
+  Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box
+----
+
+.Prepare Atomic Vagrant
+----
+git clone https://github.com/markllama/lisa17
+cd lisa17/atomic-vagrant
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
+----
+
+.Start Atomic Cluster
+----
+$ +vagrant status+
+Current machine states:
+
+atomic-01                 not created (virtualbox)
+atomic-02                 not created (virtualbox)
+atomic-03                 not created (virtualbox)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run \`vagrant status NAME\`.
+$ +vagrant up+
+
+
+=== Vagrant Boxes
+
+* https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box[Fedora 26 Virtualbox image]
+* https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-libvirt.box[Fedora 26 libvirt image]
+
+
+
+
+

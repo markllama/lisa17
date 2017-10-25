@@ -2,3 +2,4 @@
 hostconf:
   eth1: true
   etcd: true
+  flanneld: true
