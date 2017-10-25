@@ -28,6 +28,7 @@ This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
 VM, run \`vagrant status NAME\`.
 $ +vagrant up+
+----
 
 
 === Vagrant Boxes
