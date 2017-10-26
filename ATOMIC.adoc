@@ -32,6 +32,27 @@ $ +vagrant up+
 ----
 
 
+.Configure etcd 1
+----
+sed 's/{HOSTNUM}/1/' sync/etcd.conf.template > etcd.conf
+sudo cp etcd.conf /etc/etcd/
+sudo systemctl start --no-block etcd
+----
+
+.Configure etcd 2 and 3
+----
+sed 's/{HOSTNUM}/2/' sync/etcd.conf.template > etcd.conf
+sudo cp etcd.conf /etc/etcd/
+sudo systemctl start
+----
+
+----
+etcdctl member list
+25d6ce33763c5524: name=atomic-02 peerURLs=http://172.17.8.102:2380 clientURLs=http://172.17.8.102:2379 isLeader=false
+6ae27f9fa2984b1d: name=atomic-01 peerURLs=http://172.17.8.101:2380 clientURLs=http://172.17.8.101:2379 isLeader=true
+ff32f4b39b9c47bd: name=atomic-03 peerURLs=http://172.17.8.103:2380 clientURLs=http://172.17.8.103:2379 isLeader=false
+----
+
 === Vagrant Boxes
 
 * https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box[Fedora 26 Virtualbox image]
