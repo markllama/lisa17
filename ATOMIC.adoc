@@ -31,13 +31,65 @@ VM, run 'vagrant status NAME'.
 $ +vagrant up+
 ----
 
+Once the instances are up, create three windows using tabs, or tmux and log in to the first one.
+
+.Login to an instnace in Vagrant
+----
+vagrant ssh atomic-01
+----
+
+Log into _atomic-02_ and _atomic-03_ in the same way.
+
+
+== Configure `etcd`
+
+A template for the `etcd.conf` is provided in `sync/etcd.conf.template`. A simple `sed` line will replace the values needed for each host.
+
+.etcd.conf.template
+----
+# [member]
+ETCD_NAME=atomic-0{HOSTNUM}
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+
+ETCD_LISTEN_PEER_URLS="http://172.17.8.10{HOSTNUM}:2380"
+ETCD_LISTEN_CLIENT_URLS="http://127.0.0.1:2379,http://172.17.8.10{HOSTNUM}:2379"
+
+# [cluster]
+ETCD_INITIAL_ADVERTISE_PEER_URLS="http://172.17.8.10{HOSTNUM}:2380"
+ETCD_INITIAL_CLUSTER_STATE="new"
+ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+ETCD_ADVERTISE_CLIENT_URLS="http://172.17.8.10{HOSTNUM}:2379"
+
+ETCD_INITIAL_CLUSTER="atomic-01=http://172.17.8.101:2380,atomic-02=http://172.17.8.102:2380,atomic-03=http://172.17.8.103:2380"
+
+#[security]
+#ETCD_CERT_FILE=""
+#ETCD_KEY_FILE=""
+#ETCD_CLIENT_CERT_AUTH="false"
+#ETCD_TRUSTED_CA_FILE=""
+#ETCD_AUTO_TLS="false"
+#ETCD_PEER_CERT_FILE=""
+#ETCD_PEER_KEY_FILE=""
+#ETCD_PEER_CLIENT_CERT_AUTH="false"
+#ETCD_PEER_TRUSTED_CA_FILE=""
+#ETCD_PEER_AUTO_TLS="false"
+----
+
+In this simple environment you only need to set the host number in the member and cluster sections.  We're ignoring security for this lab.
+
+To prepare and start the `etcd` on the first instance, run the command below.
+The `systemctl start` will block waiting to form a cluster.
 
 .Configure etcd 1
 ----
 sed 's/{HOSTNUM}/1/' sync/etcd.conf.template > etcd.conf
 sudo cp etcd.conf /etc/etcd/
-sudo systemctl start --no-block etcd
+sudo systemctl start
 ----
+
+Note the `HOSTUM` replacement.  Do the same thing on _atomic-02_ and
+_atomic-03_ as well, replacint "1" with "2" and "3" for each host.
+
 
 .Configure etcd 2 and 3
 ----
@@ -45,6 +97,12 @@ sed 's/{HOSTNUM}/2/' sync/etcd.conf.template > etcd.conf
 sudo cp etcd.conf /etc/etcd/
 sudo systemctl start
 ----
+
+When you start the second etcd, the cluster will begin to form and the
+first systemctl will unblock and complete.  When automating, if sync
+is not needed, add the `--no-block` switch to proceed.
+
+When all three are started, check the status of the cluster with the `etcdctl member list` command.
 
 ----
 etcdctl member list
