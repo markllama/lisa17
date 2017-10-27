@@ -84,7 +84,7 @@ The `systemctl start` will block waiting to form a cluster.
 ----
 sed 's/{HOSTNUM}/1/' sync/etcd.conf.template > etcd.conf
 sudo cp etcd.conf /etc/etcd/
-sudo systemctl start
+sudo systemctl start etcd
 ----
 
 Note the `HOSTUM` replacement.  Do the same thing on _atomic-02_ and
@@ -95,7 +95,7 @@ _atomic-03_ as well, replacint "1" with "2" and "3" for each host.
 ----
 sed 's/{HOSTNUM}/2/' sync/etcd.conf.template > etcd.conf
 sudo cp etcd.conf /etc/etcd/
-sudo systemctl start
+sudo systemctl start etcd
 ----
 
 When you start the second etcd, the cluster will begin to form and the
