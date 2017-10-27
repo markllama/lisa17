@@ -1,5 +1,8 @@
 = Atomic Host Demo
 
+
+== Add the image (avoid auto-download)
+
 To avoid download time, add the box using a local image.
 
 .Add Atomic Vagrant Box (VirtualBox)
@@ -8,12 +11,19 @@ vagrant box add --name atomic-f26 \
   Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box
 ----
 
+== Install the Atomic Vagrant Configuration
+
+Clone the git repository with this text and the vagrant configuration
+for the Atomic Host lab.
+
 .Prepare Atomic Vagrant
 ----
 git clone https://github.com/markllama/lisa17
 cd lisa17/atomic-vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 ----
+
+== Start the instances
 
 [subs=+macros]
 .Start Atomic Cluster
@@ -110,6 +120,49 @@ etcdctl member list
 6ae27f9fa2984b1d: name=atomic-01 peerURLs=http://172.17.8.101:2380 clientURLs=http://172.17.8.101:2379 isLeader=true
 ff32f4b39b9c47bd: name=atomic-03 peerURLs=http://172.17.8.103:2380 clientURLs=http://172.17.8.103:2379 isLeader=false
 ----
+
+== Verify and Explore `etcd` operation
+
+Add a key/value to the etcd database.  Run the add operation on _atomic-01_
+
+----
+
+[vagrant@atomic-01 ~]$ etcdctl set /test/value '{"test": "value0"}'{"test": "value0"}
+----
+
+The key and value should be visible from all three hosts.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl get /test/value
+{"test": "value0"}
+----
+
+Set, get and update keys this way.
+
+Etcd can also block waiting for changes or _watching_ on a key.
+
+On _atomic-03_ watch the `/test/value` key.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl watch /test/value # blocks
+----
+
+Set a new value from _atomic_02_.
+
+----
+[vagrant@atomic-02 ~]$ etcdctl set /test/value '{"test": "value1"}'
+{"test": "value1"}
+----
+
+The client on _atomic-03_ unblocks and returns the new value.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl watch /test/value # unblocked
+{"test": "value1"}
+----
+== Configure Flannel SDN
+
+
 
 === Vagrant Boxes
 
