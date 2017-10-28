@@ -162,20 +162,31 @@ The client on _atomic-03_ unblocks and returns the new value.
 ----
 == Configure Flannel SDN
 
-The flannel configuration consists of two parts.  The service configuration is stored in `etcd`. The `flanneld` on each node must be configured to find the configuration.  Then the nodes can merge and form a cluster.
+The flannel configuration consists of two parts.  The service configuration is stored in `etcd`. The `flanneld` on each node must be configured to find the configuration, (by default, localhost).  In this case, it must also be configured to use the `eth1` interface and to do NAT for IP addresses inside the SDN
 
 The `flanneld` also writes modifications for the Docker daemon.  After the flannel SDN is operating, the `docker` service must restart on all nodes.
 
 === Set the `flannel` service config in `etcd`
 
 ----
-[vagrant@atomic-01 ~]$ etcdctl set /atomic.io/network/config '{"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}'
+[vagrant@atomic-01 ~]$ etcdctl set /atomic.io/network/config '\
+    {"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}'
 {"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}
 ----
 
 
-=== Configure each member to query the `etcd`
+=== Configure and Start `flanneld`
 
+Flannel must use the alternate IP interface and do IP masquarading (NAT) at the border.  Once the flanneld starts, it generates a config modification for Docker.  This instructs the `dockerd` to use the flannel network. Finally iptables must have a policy of accepting forwarded packets from the flanneld.
+
+Run these commands on each of the instances.
+
+----
+sudo sed -i '$aFLANNEL_OPTIONS="--ip-masq=true --iface=eth1"' /etc/sysconfig/flanneld
+sudo systemctl start flanneld
+sudo systemctl restart docker
+sudo iptables -P FORWARD ACCEPT
+----
 
 
 === Vagrant Boxes
