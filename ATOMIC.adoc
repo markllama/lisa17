@@ -230,6 +230,25 @@ Log into atomic-03 and try the same test.  The create a container and test from 
 ...
 ----
 
+=== Cleanup and Automated Setup
+
+Now that you've seen how this works manually, you can work with it.  When you're finished you can tear it down and rebuild it automatically.
+
+Back out of the atomic hosts and use vagrant to remove the instances.
+
+----
+vagrant destroy --force
+----
+
+Edit the Vagrantfile and set the configuration switches for `etcd` and `flannel` 
+to `true`.
+
+----
+sed '-i /configure_/s/false/true/' Vagrantfile
+----
+
+When these are set, Vagrant will use script provisioning to initialize `etcd` and `flannel`.
+
 === Vagrant Boxes
 
 * https://dl.fedoraproject.org/pub/fedora/linux/releases/26/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box[Fedora 26 Virtualbox image]
