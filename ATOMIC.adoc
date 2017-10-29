@@ -215,9 +215,20 @@ The Python3 `http.server` is a simple web server that returns files in the curre
 [atomic-01]$ curl http://172.44.28.2:8000
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
+...
 ----
 
+Log into atomic-03 and try the same test.  The create a container and test from there.
 
+----
+[atomic-03]$ sudo docker pull fedora
+[atomic-03]$ sudo docker run -it --rm fedora
+[root@25be96d25a6b /]# curl http://172.44.5.2:8000
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+...
+----
 
 === Vagrant Boxes
 
