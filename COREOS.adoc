@@ -1,3 +1,30 @@
+= Boot CoreOS in Vagrant
+
+CoreOS provides a vagrant box setup that initializes `etcd` and
+`flannel`.  Unfortunately, in the last 6 months they've also started
+an initiative to replae `cloud-init`, their configuration spec
+mechanism with `ignition`.  Ignition will be much more featureful, but
+it is still a work in progress and they have begun changing the
+vagrant setup before it is entirely ready.
+
+To install and run CoreOS in vagrant, revert the git repo to the last
+working state with `cloud-init` and then proceed.
+----
+git clone https://github.com/coreos/coreos-vagrant
+cd coreos-vagrant
+git checkout dc8dc0efc3629940b9c66ae2afc96057f3287713
+cp config.rb.sample config.rb
+export NUM_INSTANCES=3
+sed -e "s/<token>/$(curl -s https://discovery.etcd.io/new?size=3 | cut -d/ -f4)/" \
+  user-data.sample > user-data
+vagrant up
+…
+vagrant ssh core-01
+----
+Due to the nature of the changes, I did not base a demo on CoreOS/cloud-init. CoreOS will complete the work on Ignition soon and I will revisit it then.
+
+
+== Vagrant Boxes
 
 
 * https://alpha.release.core-os.net/amd64-usr/1562.1.0/coreos_production_vagrant.box[CoreOS Alpha Box]
