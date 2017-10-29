@@ -48,7 +48,7 @@ def configure_flanneld(vm, instance_num)
   # Only set the flannel configuration in etcd once
   if instance_num == $num_instances then
     vm.provision :shell, :name => "set flannel cfg",
-                 :inline => "etcdctl set /atomic.io/network/config \'{ \"Network\": \"172.24.0.0/16\", \"Backend\": {\"Type\": \"vxlan\"}}\'"
+                 :inline => "etcdctl set /atomic.io/network/config \'{ \"Network\": \"172.44.0.0/16\", \"Backend\": {\"Type\": \"vxlan\"}}\'"
   end
 
   vm.provision :shell, :name => "flannel service" + block_start(instance_num),

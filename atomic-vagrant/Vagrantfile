@@ -14,9 +14,9 @@ $configure_flanneld = false
 
 data = {
   'hosts' => {
-    'atomic-01' => { 'ipaddr' => '172.17.8.101' },
-    'atomic-02' => { 'ipaddr' => '172.17.8.102' },
-    'atomic-03' => { 'ipaddr' => '172.17.8.103' },
+    'atomic-01' => { 'ipaddr' => '172.40.8.101' },
+    'atomic-02' => { 'ipaddr' => '172.40.8.102' },
+    'atomic-03' => { 'ipaddr' => '172.40.8.103' },
   }
 }
 
