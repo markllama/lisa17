@@ -1,5 +1,8 @@
 = Atomic Host Demo
 
+
+== Add the image (avoid auto-download)
+
 To avoid download time, add the box using a local image.
 
 .Add Atomic Vagrant Box (VirtualBox)
@@ -8,12 +11,19 @@ vagrant box add --name atomic-f26 \
   Fedora-Atomic-Vagrant-26-1.5.x86_64.vagrant-virtualbox.box
 ----
 
+== Install the Atomic Vagrant Configuration
+
+Clone the git repository with this text and the vagrant configuration
+for the Atomic Host lab.
+
 .Prepare Atomic Vagrant
 ----
 git clone https://github.com/markllama/lisa17
 cd lisa17/atomic-vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 ----
+
+== Start the instances
 
 [subs=+macros]
 .Start Atomic Cluster
@@ -110,6 +120,74 @@ etcdctl member list
 6ae27f9fa2984b1d: name=atomic-01 peerURLs=http://172.17.8.101:2380 clientURLs=http://172.17.8.101:2379 isLeader=true
 ff32f4b39b9c47bd: name=atomic-03 peerURLs=http://172.17.8.103:2380 clientURLs=http://172.17.8.103:2379 isLeader=false
 ----
+
+== Verify and Explore `etcd` operation
+
+Add a key/value to the etcd database.  Run the add operation on _atomic-01_
+
+----
+
+[vagrant@atomic-01 ~]$ etcdctl set /test/value '{"test": "value0"}'{"test": "value0"}
+----
+
+The key and value should be visible from all three hosts.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl get /test/value
+{"test": "value0"}
+----
+
+Set, get and update keys this way.
+
+Etcd can also block waiting for changes or _watching_ on a key.
+
+On _atomic-03_ watch the `/test/value` key.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl watch /test/value # blocks
+----
+
+Set a new value from _atomic_02_.
+
+----
+[vagrant@atomic-02 ~]$ etcdctl set /test/value '{"test": "value1"}'
+{"test": "value1"}
+----
+
+The client on _atomic-03_ unblocks and returns the new value.
+
+----
+[vagrant@atomic-03 ~]$ etcdctl watch /test/value # unblocked
+{"test": "value1"}
+----
+== Configure Flannel SDN
+
+The flannel configuration consists of two parts.  The service configuration is stored in `etcd`. The `flanneld` on each node must be configured to find the configuration, (by default, localhost).  In this case, it must also be configured to use the `eth1` interface and to do NAT for IP addresses inside the SDN
+
+The `flanneld` also writes modifications for the Docker daemon.  After the flannel SDN is operating, the `docker` service must restart on all nodes.
+
+=== Set the `flannel` service config in `etcd`
+
+----
+[vagrant@atomic-01 ~]$ etcdctl set /atomic.io/network/config '\
+    {"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}'
+{"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}
+----
+
+
+=== Configure and Start `flanneld`
+
+Flannel must use the alternate IP interface and do IP masquarading (NAT) at the border.  Once the flanneld starts, it generates a config modification for Docker.  This instructs the `dockerd` to use the flannel network. Finally iptables must have a policy of accepting forwarded packets from the flanneld.
+
+Run these commands on each of the instances.
+
+----
+sudo sed -i '$aFLANNEL_OPTIONS="--ip-masq=true --iface=eth1"' /etc/sysconfig/flanneld
+sudo systemctl start flanneld
+sudo systemctl restart docker
+sudo iptables -P FORWARD ACCEPT
+----
+
 
 === Vagrant Boxes
 
