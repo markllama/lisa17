@@ -187,6 +187,36 @@ sudo systemctl start flanneld
 sudo systemctl restart docker
 sudo iptables -P FORWARD ACCEPT
 ----
+== Test Connectivity
+
+=== Start `httpd` on `atomic-01`
+
+Now containers running on any host should have access to the networks
+of any container in the cluster.  To test, create a container running
+a simple web server and try accessing it from containers on one of the
+other hosts.
+
+.Start a simple web server
+----
+[atomic-01]$ sudo docker pull fedora
+[atomic-01]$ sudo docker run -d --name webserver fedora python3 -m http.server
+----
+
+Now inspect the container to find the IP address
+
+----
+[atomic-01]$ sudo docker inspect webserver --format '{{.NetworkSettings.IPAddress}}'
+172.44.28.2
+----
+
+The Python3 `http.server` is a simple web server that returns files in the current working directory where the daemon is started.
+
+----
+[atomic-01]$ curl http://172.44.28.2:8000
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+....
+
 
 
 === Vagrant Boxes
