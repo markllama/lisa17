@@ -169,8 +169,8 @@ The `flanneld` also writes modifications for the Docker daemon.  After the flann
 === Set the `flannel` service config in `etcd`
 
 ----
-[vagrant@atomic-01 ~]$ etcdctl set /atomic.io/network/config '\
-    {"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}'
+[vagrant@atomic-01 ~]$ etcdctl set /atomic.io/network/config \
+  '{"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}'
 {"Network": "172.24.0.0/16", "Backend": {"Type": "vxlan"}}
 ----
 
