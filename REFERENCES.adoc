@@ -1,0 +1,76 @@
+== Reference Catalog
+
+* CoreOS Announcement
+  https://www.wired.com/2013/08/coreos-the-new-linux/
+
+
+* https://coreos.com/os/docs/latest/sdk-modifying-coreos.html
+
+
+* https://coreos.com/os/docs/latest/sdk-disk-partitions.html
+
+
+* https://rpm-ostree.readthedocs.io/en/latest/
+
+
+* https://coreos.com/os/docs/latest/booting-on-vagrant.html
+
+
+* https://github.com/markllama/coreos-vagrant
+
+
+* https://github.com/coreos/coreos-vagrant
+
+* CoreOS etcd intro: https://coreos.com/etcd/
+* Source Code: https://github.com/coreos/etcd
+* etcd docs (v2): https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md
+
+* curl https://discovery.etcd.io/new?size=3 ; echo
+
+* CoreOS Flannel Docs: https://coreos.com/flannel/docs/latest/
+* Source Code: https://github.com/coreos/flannel
+
+
+* OCI Image Spec v 1.0 - https://github.com/opencontainers/image-spec/releases/tag/v1.0.0
+
+* OCI Runtime Spec v 1.0 - https://github.com/opencontainers/runtime-spec/releases/tag/v1.0.0
+
+* https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept/
+* https://www.projectatomic.io/blog/2015/09/using-a-spc-to-troubleshoot-containers/
+* https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/managing_containers/running_super_privileged_containers
+
+* http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/
+* https://github.com/projectatomic/atomic-system-containers
+* https://www.slideshare.net/GiuseppeScrivano/atomic-system-containers
+* https://hub.docker.com/u/modularitycontainers/
+* https://github.com/container-images
+
+* http://cockpit-project.org/guide/latest/cockpit-ws.8.html
+
+* https://docs.pagure.org/modularity/
+* https://docs.pagure.org/modularity/boltron/
+* https://hub.docker.com/u/modularitycontainers/
+
+* https://github.com/coreos/toolbox
+
+* http://www.projectatomic.io/docs/usr-bin-atomic/
+* https://github.com/projectatomic/atomic
+
+* SOURCE - https://coreos.com/os/docs/latest/sdk-modifying-coreos.html
+* Requires manual patch: https://github.com/coreos/chromite/pull/23 - 20171008
+
+* rpm-ostree-toolbox: 
+** https://github.com/projectatomic/rpm-ostree-toolbox
+** https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/
+** https://developers.redhat.com/blog/2015/01/15/creating-custom-atomic-trees-images-and-installers-part-2/
+
+* Repo container:
+** http://www.projectatomic.io/docs/compose-your-own-tree/   < +++!
+** http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
+** https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
+
+* SOURCE: https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
+
+* https://coreos.com/os/docs/latest/update-strategies.html
+
+* http://www.projectatomic.io/docs/os-updates/
