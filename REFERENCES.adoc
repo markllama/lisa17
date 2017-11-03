@@ -32,20 +32,33 @@ absorbed upstream.
 
 ==== Updates
 
-* http://www.projectatomic.io/docs/os-updates/
+* Atomic Update and Rollback +
+  http://www.projectatomic.io/docs/os-updates/
 
 ==== Custom Builds
 
 * Repo container:
-** http://www.projectatomic.io/docs/compose-your-own-tree/   < +++!
-** http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
-** https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
 
 
-* rpm-ostree-toolbox: 
-** https://github.com/projectatomic/rpm-ostree-toolbox
-** https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/
-** https://developers.redhat.com/blog/2015/01/15/creating-custom-atomic-trees-images-and-installers-part-2/
+** The best/simplest `rpm-ostree` build process. +
+  Runs in a container and includes are repo server. +
+  Probably needs decomposition for production workflows. +
+  http://www.projectatomic.io/docs/compose-your-own-tree
+
+** An older blog post
+   http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
+
+** Describe how builds are done in CI +
+   https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
+
+
+* rpm-ostree-toolbox +
+  A (now deprecated) attempt to unify the tree and image composition tasks
+** Source +
+  https://github.com/projectatomic/rpm-ostree-toolbox
+** A two part tutorial for using `rpm-ostree-toolbox`. Deprecated +
+*** https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/
+*** https://developers.redhat.com/blog/2015/01/15/creating-custom-atomic-trees-images-and-installers-part-2/
 
 
 === CoreOS Container Linux
@@ -69,6 +82,10 @@ absorbed upstream.
 ==== Updates
 
 * https://coreos.com/os/docs/latest/update-strategies.html
+* Update Engine - Check and run updates and reboots +
+  https://github.com/coreos/update_engine
+* Locksmith - coordinate to avoid simultaneous reboots
+  https://github.com/coreos/locksmith
 
 ==== Custom Builds
 
