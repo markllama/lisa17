@@ -14,7 +14,7 @@
   http://www.projectatomic.io/download/
 
 * Booting on Vagrant +
-  https://github.com/markllama/lisa17/atomic-vagrant+
+  https://github.com/markllama/lisa17/atomic-vagrant +
   NOTE: There are other official-appearing links to `atomic-vagrant`
   repos, but the ones I found have gone stale.  That's why I did my own.
   The
