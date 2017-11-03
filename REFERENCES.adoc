@@ -4,13 +4,13 @@
 
 ==== Architecture
 
-* rpm-ostree
+* rpm-ostree +
   https://rpm-ostree.readthedocs.io/en/latest/
 
 
 ==== Installation
 
-* Booting on Vagrant
+* Booting on Vagrant +
   https://github.com/coreos/atomic-vagrant
 
 
