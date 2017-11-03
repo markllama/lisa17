@@ -28,79 +28,73 @@
 ** http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
 ** https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
 
-* SOURCE: https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
+* https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
 
 
 === CoreOS Container Linux
 
-* CoreOS Announcement
+* CoreOS Announcement +
   https://www.wired.com/2013/08/coreos-the-new-linux/
 
 ==== Architecture
 
-* CoreOS Disk Architectures
+* CoreOS Disk Architectures +
   https://coreos.com/os/docs/latest/sdk-disk-partitions.html
 
 ==== Installation
 
-* Booting on Vagrant - Ignition - Current/Stock (broken as of 20171103)
+* Booting on Vagrant - Ignition - Current/Stock (broken as of 20171103) +
   https://coreos.com/os/docs/latest/booting-on-vagrant.html
 
-* Booting on Vagrant - cloud-init (submodule + select commit)
+* Booting on Vagrant - cloud-init (submodule + select commit) +
   https://github.com/markllama/coreos-vagrant
 
 ==== Updates
 
 ==== Custom Builds
 
-* Modifying CoreOS
+* Modifying CoreOS +
   https://coreos.com/os/docs/latest/sdk-modifying-coreos.html
-* Requires manual patch - 20171008
+* Requires manual patch - 20171008 +
   https://github.com/coreos/chromite/pull/23
 
 
 === Container Standards
 
-* OCI Image Spec v 1.0
+* OCI Image Spec v 1.0 +
   https://github.com/opencontainers/image-spec/releases/tag/v1.0.0
 
-* OCI Runtime Spec v 1.0
+* OCI Runtime Spec v 1.0 +
   https://github.com/opencontainers/runtime-spec/releases/tag/v1.0.0
 
 === Clustering
 
 ==== Shared Configuration
 
-* CoreOS etcd intro
+* CoreOS etcd intro +
   https://coreos.com/etcd/
 
-* Source Code:
+* Source Code +
   https://github.com/coreos/etcd
 
-* etcd docs (v2):
+* etcd docs (v2) +
   https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md
 
-* Etcd Public Discovery
+* Etcd Public Diacovery +
   https://discovery.etcd.io
   `curl https://discovery.etcd.io/new?size=3 ; echo`
 
 
 ==== Software Defined Network
 
-* CoreOS Flannel Docs
+* CoreOS Flannel Docs +
   https://coreos.com/flannel/docs/latest/
 
-* Source Code
+* Source Code +
   https://github.com/coreos/flannel
 
 
 === Admin Tools
-
-
-
-
-
-
 
 * https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept/
 * https://www.projectatomic.io/blog/2015/09/using-a-spc-to-troubleshoot-containers/
