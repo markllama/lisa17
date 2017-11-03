@@ -45,7 +45,7 @@ absorbed upstream.
   Probably needs decomposition for production workflows. +
   http://www.projectatomic.io/docs/compose-your-own-tree
 
-** An older blog post
+** An older blog post +
    http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
 
 ** Describe how builds are done in CI +
@@ -75,13 +75,17 @@ absorbed upstream.
 
 * Booting on Vagrant - Ignition - Current/Stock (broken as of 20171103) +
   https://coreos.com/os/docs/latest/booting-on-vagrant.html
-
 * Booting on Vagrant - cloud-init (submodule + select commit) +
-  https://github.com/markllama/coreos-vagrant
+  https://github.com/markllama/coreos-vagrant +
+  Commit dc8dc0efc3629940b9c66ae2afc96057f3287713 +
+  https://github.com/coreos/coreos-vagrant/tree/dc8dc0efc3629940b9c66ae2afc96057f3287713
+* Booting CoreOS to Disk +
+  https://coreos.com/os/docs/latest/installing-to-disk.html
 
 ==== Updates
 
-* https://coreos.com/os/docs/latest/update-strategies.html
+* Managing Updates
+  https://coreos.com/os/docs/latest/update-strategies.html
 * Update Engine - Check and run updates and reboots +
   https://github.com/coreos/update_engine
 * Locksmith - coordinate to avoid simultaneous reboots
@@ -97,9 +101,10 @@ absorbed upstream.
 
 === Container Standards
 
+https://www.opencontainers.org/[OCI](Open Container Initiative) is the industry effort to define standard container image and runtime specifications. 
+
 * OCI Image Spec v 1.0 +
   https://github.com/opencontainers/image-spec/releases/tag/v1.0.0
-
 * OCI Runtime Spec v 1.0 +
   https://github.com/opencontainers/runtime-spec/releases/tag/v1.0.0
 
@@ -109,11 +114,10 @@ absorbed upstream.
 
 * CoreOS etcd intro +
   https://coreos.com/etcd/
-
 * Source Code +
   https://github.com/coreos/etcd
-
 * etcd docs (v2) +
+  etcd V2 is deprecated.  V3 improves storage, latancy and scaling performance +
   https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md
 
 * Etcd Public Diacovery +
