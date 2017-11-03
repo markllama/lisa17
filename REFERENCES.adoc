@@ -40,8 +40,8 @@ absorbed upstream.
 * Repo container:
 
 
-** The best/simplest `rpm-ostree` build process. +
-  Runs in a container and includes are repo server. +
+** The best/simplest `rpm-ostree` build process. 
+  Runs in a container and includes are repo server. 
   Probably needs decomposition for production workflows. +
   http://www.projectatomic.io/docs/compose-your-own-tree
 
