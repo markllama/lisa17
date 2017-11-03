@@ -10,8 +10,23 @@
 
 ==== Installation
 
+* Atomic Downloads +
+  http://www.projectatomic.io/download/
+
 * Booting on Vagrant +
-  https://github.com/coreos/atomic-vagrant
+  https://github.com/markllama/lisa17/atomic-vagrant+
+  NOTE: There are other official-appearing links to `atomic-vagrant`
+  repos, but the ones I found have gone stale.  That's why I did my own.
+  The
+  https://github.com/projectatomic/vagrant-atomic[projectatomic/vagrant-atomic]
+  repo is actually the source for a vagrant plugin which has been
+  absorbed upstream.
+
+* Fedora Bare Metal Install +
+  http://www.projectatomic.io/docs/fedora_atomic_bare_metal_installation/
+
+* RHEL Atomic Installation +
+  https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html-single/installation_and_configuration_guide/
 
 
 ==== Updates
@@ -20,17 +35,17 @@
 
 ==== Custom Builds
 
-* rpm-ostree-toolbox: 
-** https://github.com/projectatomic/rpm-ostree-toolbox
-** https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/
-** https://developers.redhat.com/blog/2015/01/15/creating-custom-atomic-trees-images-and-installers-part-2/
-
 * Repo container:
 ** http://www.projectatomic.io/docs/compose-your-own-tree/   < +++!
 ** http://www.projectatomic.io/blog/2014/08/build-your-own-atomic-centos-or-fedora/
 ** https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
 
-* https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
+
+* rpm-ostree-toolbox: 
+** https://github.com/projectatomic/rpm-ostree-toolbox
+** https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/
+** https://developers.redhat.com/blog/2015/01/15/creating-custom-atomic-trees-images-and-installers-part-2/
+
 
 === CoreOS Container Linux
 
