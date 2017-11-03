@@ -16,6 +16,8 @@
 
 ==== Updates
 
+* http://www.projectatomic.io/docs/os-updates/
+
 ==== Custom Builds
 
 * rpm-ostree-toolbox: 
@@ -29,7 +31,6 @@
 ** https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
 
 * https://dustymabe.com/2017/08/08/how-do-we-create-ostree-repos-and-artifacts-in-fedora/
-
 
 === CoreOS Container Linux
 
@@ -50,6 +51,8 @@
   https://github.com/markllama/coreos-vagrant
 
 ==== Updates
+
+* https://coreos.com/os/docs/latest/update-strategies.html
 
 ==== Custom Builds
 
@@ -81,9 +84,8 @@
   https://github.com/coreos/etcd/blob/master/Documentation/v2/README.md
 
 * Etcd Public Diacovery +
-  https://discovery.etcd.io
-  `curl https://discovery.etcd.io/new?size=3 ; echo`
-
+  https://discovery.etcd.io +
+  curl https://discovery.etcd.io/new?size=3 ; echo`
 
 ==== Software Defined Network
 
@@ -93,12 +95,24 @@
 * Source Code +
   https://github.com/coreos/flannel
 
-
 === Admin Tools
+
+==== CLI Tools
+
+* http://www.projectatomic.io/docs/usr-bin-atomic/
+* https://github.com/projectatomic/atomic
+
+* CoreOS Debugging Tools and `toolbox`
+https://coreos.com/os/docs/latest/install-debugging-tools.html
+
+==== Super Privileged Containers
 
 * https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept/
 * https://www.projectatomic.io/blog/2015/09/using-a-spc-to-troubleshoot-containers/
 * https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_atomic_host/7/html/managing_containers/running_super_privileged_containers
+
+
+==== System Containers
 
 * http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/
 * https://github.com/projectatomic/atomic-system-containers
@@ -106,18 +120,17 @@
 * https://hub.docker.com/u/modularitycontainers/
 * https://github.com/container-images
 
+==== Monitoring (sort of)
+
 * http://cockpit-project.org/guide/latest/cockpit-ws.8.html
+
+
+==== An Alternative - Fedora Modularity
 
 * https://docs.pagure.org/modularity/
 * https://docs.pagure.org/modularity/boltron/
 * https://hub.docker.com/u/modularitycontainers/
 
-* https://github.com/coreos/toolbox
-
-* http://www.projectatomic.io/docs/usr-bin-atomic/
-* https://github.com/projectatomic/atomic
 
 
-* https://coreos.com/os/docs/latest/update-strategies.html
 
-* http://www.projectatomic.io/docs/os-updates/
