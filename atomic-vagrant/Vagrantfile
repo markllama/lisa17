@@ -9,8 +9,8 @@ settings = YAML.load_file 'config.yml'
 $box_name = "atomic-fedora26"
 $instance_name_prefix = "atomic"
 $num_instances = 3
-$configure_etcd = false
-$configure_flanneld = false
+$configure_etcd = true
+$configure_flanneld = true
 
 data = {
   'hosts' => {
